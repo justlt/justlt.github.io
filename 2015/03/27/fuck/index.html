@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html class="light">
+
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>云卷云舒 | Hexo</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="liutong,iOS,设计,Hexo主题," />
+  
+
+  <meta name="description" content="单例，主要特点是一个类只有一个对象。对外提供了一个获取唯一对象的方法，一般都是类方法
+8.在使用系统的一些类例如UITableView时，会发现其delegate属性的语义设置为assign而不是retain，为什么呢？答：delegate 的语义修饰符 为assign 不是 retain 主要是为了避免两个对象因相互引用造成的内存泄露问题。因为  retain修饰delegate，当通过s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="云卷云舒">
+<meta property="og:url" content="http://yoursite.com/2015/03/27/fuck/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="单例，主要特点是一个类只有一个对象。对外提供了一个获取唯一对象的方法，一般都是类方法
+8.在使用系统的一些类例如UITableView时，会发现其delegate属性的语义设置为assign而不是retain，为什么呢？答：delegate 的语义修饰符 为assign 不是 retain 主要是为了避免两个对象因相互引用造成的内存泄露问题。因为  retain修饰delegate，当通过s">
+<meta property="og:updated_time" content="2016-03-27T09:36:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="云卷云舒">
+<meta name="twitter:description" content="单例，主要特点是一个类只有一个对象。对外提供了一个获取唯一对象的方法，一般都是类方法
+8.在使用系统的一些类例如UITableView时，会发现其delegate属性的语义设置为assign而不是retain，为什么呢？答：delegate 的语义修饰符 为assign 不是 retain 主要是为了避免两个对象因相互引用造成的内存泄露问题。因为  retain修饰delegate，当通过s">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="/css/forsigner.css">
+  
+
+  <link href="/css/styles.css?v=fece7435" rel="stylesheet">
+
+  
+
+  
+
+</head>
+
+<body>
+
+  
+    <a href="#modal-one" class="toolbox-mobile">盒子</a>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-fuck" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">云卷云舒</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2015.03.27</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>liutong</span>
+        </span>
+      
+
+      
+
+
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>   单例，主要特点是一个类只有一个对象。对外提供了一个获取唯一对象的方法，一般都是类方法</p>
+<p>8.在使用系统的一些类例如UITableView时，会发现其delegate属性的语义设置为assign而不是retain，为什么呢？<br>答：delegate 的语义修饰符 为assign 不是 retain 主要是为了避免两个对象因相互引用造成的内存泄露问题。<br>因为  retain修饰delegate，当通过set方法赋值时，对象的引用计数会+1.<br>如果此时两个对象具有如下关系：A对象有一个属性是B，B的delegate是A。<br>即互相为彼此的属性。例如： A 是viewController ，B是tableView.  B 是A的属性，B的引用计数会+1，B的delegate是A，A 的引用计数也会 +1. 那么如果A没有释放，B就一直不会释放，因为A对B有拥有权。 同理，B没有释放，A也一直释放不掉，因为B对A也有拥有权。 因此A 和 B 的dealloc 都会不执行，造成内存泄露.</p>
+<p>通知和KVO都是观察者模式的体现，二者侧重点有些不同。<br>通知往往用于1对多的场景，多个观察者观察一个通知，一旦这个通知被通知中心post，所有观察者都可以做出响应。<br>KVO多用于1对1的场景，一个对象去观察另外一个对象的属性值有没有发生变化，一旦发生变化，观察者做出响应。</p>
+<p>无论是block还是delegate模式本质上都是回调，使用block，其优点是回调的block代码块直接就放在了block赋值的地方，使代码更为紧凑，缺点是block内使用到当前类的实例变量的时候，需要注意循环引用的问题，即需要使用<strong>block(MRC下)或者</strong>weak(ARC下)定义一个弱引用的self出来，block里面使用弱引用的self去操作属性或调用方法。delegate模式不用像block一样做特殊处理，但是如果多个对象设置的代理是同一个对象，就需要在delegate方法中判断当前执行代理的是哪个对象</p>
+<p>（一）代理模式<br>应用场景：当一个类的某些功能需要由别的类来实现，但是又不确定具体会是哪个类实现</p>
+<p>通知：这东西是全局的，而且是同步的，如果你要全局发送消息，并且做的事情时间不长，不会阻塞线程的话，建议使用。<br>如果一个通知的发送者有多个接受者，而且接受的位置完全不确定，那么这种情况下用通知是比较好的方式</p>
+<p>默认情况下，在block中访问的外部变量是复制过去的，即：写操作不对原变量生效<br>循环引用：某个类将block作为自己的属性变量，然后该类在block的方法体里面又使用了该类本身</p>
+<p>MVC：实例：model-即数据模型，view-视图展示，controller进行UI展现和数据交互的逻辑控制。<br> MVC是三个单词的缩写,分别为：<br>    模型(Model),视图(View)和控制Controller)。<br>MVC模式的目的就是实现Web系统的职能分工。<br>Model层实现系统中的业务逻辑，通常可以用JavaBean或EJB来实现。<br>View层用于与用户的交互，通常用JSP来实现。<br>Controller层是Model与View之间沟通的桥梁，它可以分派用户的请求并选择恰当的视图以用于显示，同时它也可以解释用户的输入并将它们映射为模型层可执行的操作。<br>MVC模式的好处<br>1.各施其职，互不干涉<br>在MVC模式中，三个层各施其职，所以如果一旦哪一层的需求发生了变化，就只需要更改相应的层中的代码而不会影响到其它层中的代码。<br>2.有利于开发中的分工<br>在MVC模式中，由于按层把系统开，那么就能更好的实现开发中的分工。网页</p>
+<p>避免block被系统释放,因为⼀一开始block是在栈中的,只有copy后的block才会<br>在堆中</p>
+
+    
+  </div>
+</article>
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal-one" aria-hidden="true">
+  <a href="#close" class="cover" aria-hidden="true"></a>
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <a href="#close" class="btn-close" aria-hidden="true">关闭</a>
+    </div>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?343', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
