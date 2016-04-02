@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="light">
+
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>APP支付之使用ApplePay支付开发步骤 | 刘彤个人博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="刘彤,iOS开发,设计,Hexo主题," />
+  
+
+  <meta name="description" content="http://ww3.sinaimg.cn/large/005KqbSEgw1f1bkh5yqkkj30i70a90sr.jpg最近苹果推出了一种新的支付方式–ApplePay支付，虽然毁誉参半，但是不得不承认国内很多的公司还有商家已经开通了ApplePay,可能最先锋的莫过于肯德基和招商银行了。抛开优劣与否不说，作为一个开发者自然要第一时间把ApplePay搞懂搞通，用不用再另说。
+AppleP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="APP支付之使用ApplePay支付开发步骤">
+<meta property="og:url" content="http://yoursite.com/2016/04/02/pay/index.html">
+<meta property="og:site_name" content="刘彤个人博客">
+<meta property="og:description" content="http://ww3.sinaimg.cn/large/005KqbSEgw1f1bkh5yqkkj30i70a90sr.jpg最近苹果推出了一种新的支付方式–ApplePay支付，虽然毁誉参半，但是不得不承认国内很多的公司还有商家已经开通了ApplePay,可能最先锋的莫过于肯德基和招商银行了。抛开优劣与否不说，作为一个开发者自然要第一时间把ApplePay搞懂搞通，用不用再另说。
+AppleP">
+<meta property="og:updated_time" content="2016-04-02T08:37:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="APP支付之使用ApplePay支付开发步骤">
+<meta name="twitter:description" content="http://ww3.sinaimg.cn/large/005KqbSEgw1f1bkh5yqkkj30i70a90sr.jpg最近苹果推出了一种新的支付方式–ApplePay支付，虽然毁誉参半，但是不得不承认国内很多的公司还有商家已经开通了ApplePay,可能最先锋的莫过于肯德基和招商银行了。抛开优劣与否不说，作为一个开发者自然要第一时间把ApplePay搞懂搞通，用不用再另说。
+AppleP">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="/css/forsigner.css">
+  
+
+  <link href="/css/styles.css?v=fece7435" rel="stylesheet">
+
+  
+
+  
+
+</head>
+
+<body>
+
+  
+    <a href="#modal-one" class="toolbox-mobile">盒子</a>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-pay" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">APP支付之使用ApplePay支付开发步骤</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.04.02</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>刘彤lt</span>
+        </span>
+      
+
+      
+
+
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p><a href="http://ww3.sinaimg.cn/large/005KqbSEgw1f1bkh5yqkkj30i70a90sr.jpg" target="_blank" rel="external">http://ww3.sinaimg.cn/large/005KqbSEgw1f1bkh5yqkkj30i70a90sr.jpg</a><br>最近苹果推出了一种新的支付方式–ApplePay支付，虽然毁誉参半，但是不得不承认国内很多的公司还有商家已经开通了ApplePay,可能最先锋的莫过于肯德基和招商银行了。抛开优劣与否不说，作为一个开发者自然要第一时间把ApplePay搞懂搞通，用不用再另说。</p>
+<p>ApplePay的支付流程</p>
+<p>在具体去进行每一步操作的时候一定要先了解一下ApplePay的具体的操作流程。<br>这里是官方给出的开发者文档。所有的流程步骤还有逻辑流程都可以在这里找到答案。<br>开发者传送门<br>使用ApplePay开发同样的需要一个商户ID，开通权限，然后根据需求拼接支付请求。Apple Pay会对支付信息进行加密处理，以防止未获授权的第三方获取用户的支付信息。剩下的就是在自己的服务器上进行支付流程和处理了。</p>
+<p>ApplePay的开发流程</p>
+<p>1 获取证书<br>详细的官方指导可以参考这里<br>苹果证书帮助<br>习惯了苹果开发的人一定会料到，新的苹果支付一定是需要一个新的证书的，没错，需要创建一个新的商业证书。<br><a href="http://ww1.sinaimg.cn/large/005KqbSEgw1f1cje8w4ftj31j00vggs3.jpg" target="_blank" rel="external">http://ww1.sinaimg.cn/large/005KqbSEgw1f1cje8w4ftj31j00vggs3.jpg</a></p>
+<p>选择右侧的[Merchant IDs]，点击右上角的添加。</p>
+<p><a href="http://ww4.sinaimg.cn/large/005KqbSEgw1f1boowiq72j31is16on54.jpg" target="_blank" rel="external">http://ww4.sinaimg.cn/large/005KqbSEgw1f1boowiq72j31is16on54.jpg</a></p>
+<p>点击continue</p>
+<p><a href="http://ww4.sinaimg.cn/large/005KqbSEgw1f1bpk8nwepj31j2170grk.jpg" target="_blank" rel="external">http://ww4.sinaimg.cn/large/005KqbSEgw1f1bpk8nwepj31j2170grk.jpg</a></p>
+<p>点击register</p>
+<p><a href="http://ww3.sinaimg.cn/large/005KqbSEgw1f1cjj7wsm1j31jm17s7di.jpg" target="_blank" rel="external">http://ww3.sinaimg.cn/large/005KqbSEgw1f1cjj7wsm1j31jm17s7di.jpg</a></p>
+<p>现在新添加的Merchant ID已经显示出来了，可以添加到列表里了。</p>
+<p><a href="http://ww1.sinaimg.cn/large/005KqbSEgw1f1bpxegf45j31ic0ok43g.jpg" target="_blank" rel="external">http://ww1.sinaimg.cn/large/005KqbSEgw1f1bpxegf45j31ic0ok43g.jpg</a></p>
+
+    
+  </div>
+</article>
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal-one" aria-hidden="true">
+  <a href="#close" class="cover" aria-hidden="true"></a>
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <a href="#close" class="btn-close" aria-hidden="true">关闭</a>
+    </div>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?343', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
